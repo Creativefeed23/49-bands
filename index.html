@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>49 · One year, forty-nine shows</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  body { margin:0; background:#050505; color:#F2F0EC; font-family:'Oswald',sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#C9962C; text-decoration:none; }
+  a:hover { color:#E8B94A; }
+  ::selection { background:#C9962C; color:#050505; }
+  @keyframes popIn { from { opacity:0; transform:translateY(12px) scale(.97);} to { opacity:1; transform:none;} }
+  @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:#050505; padding:0 0 90px">
+
+  <div style="display:flex; flex-direction:column; align-items:center; gap:14px; padding:34px 20px 22px">
+    <div style="font-size:11px; letter-spacing:.42em; color:#8A8377; text-transform:uppercase">One year · Forty-nine shows</div>
+    <div style="font-size:13px; letter-spacing:.2em; color:#C9962C; text-transform:uppercase">Click a tile to flip it. Click again for the details.</div>
+  </div>
+
+  <div style="width:min(94vw,980px); margin:0 auto; position:relative">
+    <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:3px; background:#221F1B; border:3px solid #221F1B">
+      <sc-for list="{{ cells }}" as="cell" hint-placeholder-count="49">
+        <div onMouseEnter="{{ cell.onEnter }}" onClick="{{ cell.onClick }}" style="position:relative; aspect-ratio:1.12; background:#0C0B0A; cursor:pointer; perspective:800px">
+          <div style="{{ cell.flipStyle }}">
+            <div style="position:absolute; inset:0; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:#0C0B0A">
+              <div style="{{ cell.artStyle }}">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center">
+                  <img src="art/49.png" alt="49th Birthday" style="width:74%; max-height:94%; object-fit:contain" />
+                </div>
+              </div>
+              <div style="position:absolute; left:0; right:0; top:50%; height:1px; background:rgba(0,0,0,.55)"></div>
+              <div style="position:absolute; left:0; right:0; top:50%; bottom:0; background:linear-gradient(rgba(0,0,0,.22),rgba(0,0,0,0))"></div>
+            </div>
+            <div style="position:absolute; inset:0; overflow:hidden; backface-visibility:hidden; -webkit-backface-visibility:hidden; transform:rotateX(180deg); background:#0C0B0A; display:flex; align-items:center; justify-content:center">
+              <div style="{{ cell.tileStyle }}" title="{{ cell.name }}"></div>
+              <div style="{{ cell.qStyle }}">{{ cell.qText }}</div>
+              <div style="position:absolute; left:0; right:0; top:50%; height:1px; background:rgba(0,0,0,.55)"></div>
+              <div style="position:absolute; left:0; right:0; top:50%; bottom:0; background:linear-gradient(rgba(0,0,0,.22),rgba(0,0,0,0))"></div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="width:min(94vw,980px); margin:26px auto 0; display:flex; flex-wrap:wrap; align-items:center; gap:20px 28px">
+    <div style="flex:1 1 320px; min-width:260px">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:#8A8377; margin-bottom:9px">
+        <span style="white-space:nowrap">Locked in</span>
+        <span style="color:#C9962C; font-family:'Anton',sans-serif; font-size:17px; letter-spacing:.06em">{{ seenCount }} / 49</span>
+      </div>
+      <div style="height:6px; background:#1A1815; overflow:hidden">
+        <div style="{{ barStyle }}"></div>
+      </div>
+    </div>
+    <div style="display:flex; gap:10px">
+      <div onClick="{{ revealAll }}" style="cursor:pointer; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#8A8377; border:1px solid #2C2A26; padding:11px 18px; white-space:nowrap" style-hover="color:#C9962C; border-color:#C9962C">Flip them all</div>
+      <div onClick="{{ resetGrid }}" style="cursor:pointer; font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:#8A8377; border:1px solid #2C2A26; padding:11px 18px; white-space:nowrap" style-hover="color:#C9962C; border-color:#C9962C">Put it back</div>
+    </div>
+  </div>
+
+  <div style="width:min(94vw,980px); margin:70px auto 0; display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:1px; background:#221F1B; border:1px solid #221F1B">
+    <div style="background:#0C0B0A; padding:38px 26px; text-align:center">
+      <div style="font-size:11px; letter-spacing:.34em; color:#C9962C; text-transform:uppercase; margin-bottom:16px">When</div>
+      <div style="font-family:'Anton',sans-serif; font-size:22px; letter-spacing:.02em; line-height:1.35">SATURDAY<br />7TH NOVEMBER 2026</div>
+      <div style="margin-top:10px; font-size:14px; letter-spacing:.16em; color:#C9962C">6PM TILL LATE</div>
+    </div>
+    <div style="background:#0C0B0A; padding:38px 26px; text-align:center">
+      <div style="font-size:11px; letter-spacing:.34em; color:#C9962C; text-transform:uppercase; margin-bottom:16px">Where</div>
+      <div style="font-family:'Anton',sans-serif; font-size:22px; letter-spacing:.02em; line-height:1.35">BACKYARD PARTY<br />PETERHEAD, SA</div>
+    </div>
+    <div style="background:#0C0B0A; padding:38px 26px; text-align:center">
+      <div style="font-size:11px; letter-spacing:.34em; color:#C9962C; text-transform:uppercase; margin-bottom:16px">What to expect</div>
+      <div style="font-family:'Anton',sans-serif; font-size:22px; letter-spacing:.02em; line-height:1.35">GOOD MUSIC<br />GOOD PEOPLE<br />GOOD FOOD</div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:74px; font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:#5C574E">One year. Forty-nine shows. Plenty still to come.</div>
+
+  <sc-if value="{{ modal }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed; inset:0; background:rgba(3,3,3,.86); display:flex; align-items:center; justify-content:center; padding:24px; z-index:50; animation:fadeIn .2s ease">
+      <div onClick="{{ stop }}" style="width:min(92vw,460px); background:#0C0B0A; border:1px solid #C9962C; animation:popIn .28s cubic-bezier(.2,.8,.3,1)">
+
+        <sc-if value="{{ modal.isBand }}" hint-placeholder-val="{{ true }}">
+          <sc-if value="{{ modal.hasPhoto }}" hint-placeholder-val="{{ false }}">
+            <div style="{{ modal.photoStyle }}">
+              <div style="position:absolute; inset:0; background:linear-gradient(rgba(0,0,0,0) 45%, rgba(5,5,5,.7))"></div>
+            </div>
+          </sc-if>
+          <div style="padding:26px 26px 30px">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px">
+              <div style="font-family:'Anton',sans-serif; font-size:27px; letter-spacing:.03em; color:#F2F0EC; line-height:1.1">{{ modal.name }}</div>
+              <div onClick="{{ closeModal }}" style="cursor:pointer; font-size:20px; color:#8A8377; line-height:1" style-hover="color:#C9962C">×</div>
+            </div>
+            <div style="margin-top:22px; display:grid; gap:14px">
+              <div style="display:flex; justify-content:space-between; border-bottom:1px solid #1A1815; padding-bottom:10px">
+                <span style="font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:#8A8377">Date</span>
+                <span style="font-size:15px; letter-spacing:.06em; color:#C9962C">{{ modal.date }}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; border-bottom:1px solid #1A1815; padding-bottom:10px">
+                <span style="font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:#8A8377">Venue</span>
+                <span style="font-size:15px; letter-spacing:.06em; color:#C9962C">{{ modal.venue }}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between">
+                <span style="font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:#8A8377">Show</span>
+                <span style="font-size:15px; letter-spacing:.06em; color:#F2F0EC">{{ modal.no }} of 49</span>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ modal.isSuggest }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:34px 26px 30px">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px">
+              <div>
+                <div style="font-family:'Anton',sans-serif; font-size:52px; letter-spacing:.02em; color:#C9962C; line-height:.9">?</div>
+                <div style="margin-top:14px; font-family:'Anton',sans-serif; font-size:24px; letter-spacing:.03em; color:#F2F0EC; line-height:1.15">THIS ONE'S STILL OPEN</div>
+              </div>
+              <div onClick="{{ closeModal }}" style="cursor:pointer; font-size:20px; color:#8A8377; line-height:1" style-hover="color:#C9962C">×</div>
+            </div>
+            <sc-if value="{{ suggestFormOpen }}" hint-placeholder-val="{{ true }}">
+              <div style="margin-top:12px; font-size:13px; letter-spacing:.06em; color:#8A8377; line-height:1.6">Who should fill it? Put a band in and it goes on the board.</div>
+              <div style="margin-top:24px; display:grid; gap:14px">
+                <input value="{{ suggestText }}" onChange="{{ onSuggest }}" onKeyDown="{{ onSuggestKey }}" placeholder="Band name" style="background:#050505; border:1px solid #2C2A26; color:#F2F0EC; font-family:'Oswald',sans-serif; font-size:16px; padding:13px 14px; outline:none" style-focus="border-color:#C9962C" />
+                <input value="{{ suggestName }}" onChange="{{ onSuggestName }}" onKeyDown="{{ onSuggestKey }}" placeholder="Your name" style="background:#050505; border:1px solid #2C2A26; color:#F2F0EC; font-family:'Oswald',sans-serif; font-size:16px; padding:13px 14px; outline:none" style-focus="border-color:#C9962C" />
+                <div onClick="{{ submitSuggest }}" style="{{ suggestBtnStyle }}" style-hover="background:#E8B94A">{{ suggestBtnLabel }}</div>
+                <div style="{{ suggestErrStyle }}">{{ suggestErr }}</div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ suggestSent }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:26px; animation:fadeIn .35s ease">
+                <div style="font-family:'Anton',sans-serif; font-size:26px; letter-spacing:.03em; color:#C9962C; line-height:1.15">{{ suggestSentName }}</div>
+                <div style="margin-top:12px; font-size:13px; letter-spacing:.06em; color:#8A8377; line-height:1.6">On the board, and sent through. No promises.</div>
+                <div onClick="{{ closeModal }}" style="margin-top:24px; cursor:pointer; text-align:center; border:1px solid #2C2A26; color:#8A8377; font-size:11px; letter-spacing:.24em; text-transform:uppercase; padding:13px" style-hover="color:#C9962C; border-color:#C9962C">Back to the grid</div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C9962C&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#C9962C&quot;,&quot;#B8352E&quot;,&quot;#8E8E8E&quot;,&quot;#5C8A6B&quot;]},&quot;revealMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Click&quot;,&quot;options&quot;:[&quot;Click&quot;,&quot;Hover&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+const BANDS = [
+  { i: 0,  key: 'qotsa',             photo: 'photos/qotsa.jpg',              name: 'Queens of the Stone Age', no: 5,  date: 'Tue 8 Dec 2026',  venue: 'The Drive, Adelaide' },
+  { i: 6,  key: 'primus',            photo: 'photos/primus.webp',            name: 'Primus',                  no: 6,  date: 'Tue 8 Dec 2026',  venue: 'The Drive, Adelaide' },
+  { i: 9,  key: 'tropicalfukstorm',  photo: 'photos/tropicalfukstorm.jpg',   name: 'Tropical Fuck Storm',     no: 7,  date: 'Tue 8 Dec 2026',  venue: 'The Drive, Adelaide' },
+  { i: 12, key: 'johnbutler-white',  photo: 'photos/johnbutler.png',         name: 'John Butler',             no: 3,  date: 'Tue 17 Nov 2026', venue: 'Sidney Myer Music Bowl, Melbourne' },
+  { i: 15, key: 'systemofadown',     photo: 'photos/systemofadown.jpg',      name: 'System of a Down',        no: 8,  date: 'Fri 22 Jan 2027', venue: 'Accor Stadium, Sydney' },
+  { i: 18, key: 'faithnomore',       photo: 'photos/faithnomore.jpg',        name: 'Faith No More',           no: 9,  date: 'Fri 22 Jan 2027', venue: 'Accor Stadium, Sydney' },
+  { i: 24, key: 'live',              photo: 'photos/live.webp',              name: 'Live',                    no: 10, date: 'Sat 6 Mar 2027',  venue: 'Adelaide Entertainment Centre' },
+  { i: 27, key: 'gunsnroses',        photo: 'photos/gunsnroses.avif',        name: "Guns N' Roses",           no: 4,  date: 'Sun 29 Nov 2026', venue: 'Adelaide Street Circuit' },
+  { i: 31, key: 'stonetemplepilots', photo: 'photos/stonetemplepilots.jpg',  name: 'Stone Temple Pilots',     no: 11, date: 'Sat 6 Mar 2027',  venue: 'Adelaide Entertainment Centre' },
+  { i: 36, key: 'jackjohnson',       photo: 'photos/jackjohnson.webp',       name: 'Jack Johnson',            no: 1,  date: 'Tue 17 Nov 2026', venue: 'Sidney Myer Music Bowl, Melbourne' },
+  { i: 41, key: 'benharper',         photo: 'photos/benharper.webp',         name: 'Ben Harper',              no: 2,  date: 'Tue 17 Nov 2026', venue: 'Sidney Myer Music Bowl, Melbourne' },
+  { i: 47, key: '4nonblondes',       photo: 'photos/4nonblondes.webp',       name: '4 Non Blondes',           no: 12, date: 'Sat 6 Mar 2027',  venue: 'Adelaide Entertainment Centre' },
+  { i: 20, key: 'magicdirt',         photo: 'photos/magicdirt.jpg',          name: 'Magic Dirt',              no: 13, date: 'Sat 6 Mar 2027',  venue: 'Adelaide Entertainment Centre' }
+];
+
+class Component extends DCLogic {
+  state = { flipped: {}, modal: null, suggestions: {}, suggestText: '', suggestName: '', sending: false, sent: false, err: '' };
+
+  flip(i) {
+    if (this.state.flipped[i]) return;
+    this.setState(s => ({ flipped: Object.assign({}, s.flipped, { [i]: true }) }));
+  }
+
+  renderVals() {
+    const accent = this.props.accentColor || '#C9962C';
+    const hoverFlip = this.props.revealMode === 'Hover';
+    const byIndex = {};
+    BANDS.forEach(b => { byIndex[b.i] = b; });
+
+    const cells = [];
+    for (let i = 0; i < 49; i++) {
+      const col = i % 7, row = Math.floor(i / 7);
+      const band = byIndex[i];
+      const flipped = !!this.state.flipped[i];
+      const suggestion = this.state.suggestions[i];
+      cells.push({
+        i,
+        name: band ? band.name : (suggestion || ''),
+        qText: suggestion ? suggestion : '?',
+        flipStyle: 'position:absolute; inset:0; transform-style:preserve-3d; transition:transform .62s cubic-bezier(.62,.02,.28,1); transition-delay:' + ((col + row) * 12) + 'ms; transform:rotateX(' + (flipped ? -180 : 0) + 'deg)',
+        artStyle: 'position:absolute; pointer-events:none; width:calc(700% + 18px); height:calc(700% + 18px); left:calc(' + (-col * 100) + '% - ' + (col * 3) + 'px); top:calc(' + (-row * 100) + '% - ' + (row * 3) + 'px)',
+        tileStyle: band
+          ? 'position:absolute; inset:0; background-image:url(logos/' + band.key + '.png); background-size:74% auto; background-position:center; background-repeat:no-repeat'
+          : 'display:none',
+        qStyle: band
+          ? 'display:none'
+          : (suggestion
+              ? 'position:relative; padding:0 8px; text-align:center; font-family:Oswald,sans-serif; font-weight:500; font-size:min(1.5vw,13px); line-height:1.2; letter-spacing:.04em; text-transform:uppercase; color:' + accent
+              : 'position:relative; font-family:Anton,sans-serif; font-size:min(4.6vw,44px); color:' + accent + '; opacity:.34'),
+        onEnter: hoverFlip ? () => this.flip(i) : null,
+        onClick: () => {
+          if (!this.state.flipped[i]) { this.flip(i); return; }
+          if (band) {
+            this.setState({ modal: { isBand: true, isSuggest: false, name: band.name, no: band.no, date: band.date, venue: band.venue,
+              hasPhoto: !!band.photo,
+              photoStyle: 'height:230px; position:relative; overflow:hidden; background:#050505 url(' + band.photo + ') center/cover no-repeat; border-bottom:1px solid #221F1B' } });
+          } else {
+            this.setState({ modal: { isBand: false, isSuggest: true, cell: i }, suggestText: this.state.suggestions[i] || '', sent: false, sending: false, err: '' });
+          }
+        }
+      });
+    }
+
+    const locked = BANDS.length;
+    const submitSuggest = () => {
+      const m = this.state.modal;
+      const v = (this.state.suggestText || '').trim();
+      const who = (this.state.suggestName || '').trim();
+      if (!m || this.state.sending) return;
+      if (!v) { this.setState({ err: 'Put a band name in first.' }); return; }
+      this.setState({ sending: true, err: '' });
+      fetch('https://formspree.io/f/xnpqalzb', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ band: v, from: who || 'anonymous', tile: m.cell + 1, _subject: 'Band suggestion: ' + v })
+      }).then(r => {
+        if (!r.ok) throw new Error('bad response');
+        this.setState(s => ({ suggestions: Object.assign({}, s.suggestions, { [m.cell]: v }), sending: false, sent: true }));
+      }).catch(() => {
+        this.setState(s => ({ suggestions: Object.assign({}, s.suggestions, { [m.cell]: v }), sending: false, err: "Couldn't send that through — it's on the board locally." }));
+      });
+    };
+
+    return {
+      cells,
+      seenCount: locked,
+      barStyle: 'height:100%; width:' + (locked / 49 * 100).toFixed(1) + '%; background:' + accent + '; transition:width .4s ease',
+      revealAll: () => { const e = {}; for (let i = 0; i < 49; i++) e[i] = true; this.setState({ flipped: e }); },
+      resetGrid: () => this.setState({ flipped: {} }),
+      modal: this.state.modal,
+      closeModal: () => this.setState({ modal: null }),
+      stop: e => e.stopPropagation(),
+      suggestText: this.state.suggestText,
+      suggestName: this.state.suggestName,
+      suggestFormOpen: !this.state.sent,
+      suggestSent: this.state.sent,
+      suggestSentName: (this.state.suggestText || '').trim().toUpperCase() + ' IT IS.',
+      suggestBtnLabel: this.state.sending ? 'SENDING…' : 'PUT THEM ON THE BOARD',
+      suggestBtnStyle: 'cursor:pointer; text-align:center; background:' + (this.state.sending ? '#6B5417' : accent) + '; color:#0A0A0A; font-family:Anton,sans-serif; font-size:19px; letter-spacing:.08em; padding:14px; transition:background .2s ease',
+      suggestErr: this.state.err,
+      suggestErrStyle: this.state.err ? 'font-size:12px; letter-spacing:.06em; color:#B8352E; line-height:1.5' : 'display:none',
+      onSuggest: e => this.setState({ suggestText: e.target.value, err: '' }),
+      onSuggestName: e => this.setState({ suggestName: e.target.value }),
+      onSuggestKey: e => { if (e.key === 'Enter') submitSuggest(); },
+      submitSuggest
+    };
+  }
+}
+</script>
+</body>
+</html>
