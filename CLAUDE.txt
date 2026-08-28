@@ -30,19 +30,42 @@ const BANDS = [
 | `i` | Tile position, **0-indexed**. Tile 21 on screen is `i: 20`. |
 | `key` | Logo filename in `logos/`, without `.png`. |
 | `photo` | Path to the photo, with extension. |
-| `no` | Order number shown in the panel. Increment from the current highest. |
+| `no` | Running tally of bands locked in. Next number after the current highest. Not chronological — grid position and gig date are unrelated to it. |
 | `date` | Format: `Sat 6 Mar 2027`. |
 | `venue` | Venue and city. |
 
 ## Adding a band
 
-1. Confirm `logos/<key>.png` and the photo file both exist. If either is
-   missing, stop and say so rather than adding a broken entry.
-2. Check the tile index isn't already taken by another band.
-3. Add one row to `BANDS`. Change nothing else.
-4. Keep the alignment of the existing rows.
+Requests will be brief — something like *"I've uploaded the images for
+Puscifer, add to tile 34 for 4 Dec 2026"*. Work the rest out yourself using
+the rules below. Don't ask for anything you can derive.
 
-Never invent gig dates or venues. If they weren't given, ask.
+**Finding the images.** Look in `logos/` and `photos/` for a file matching the
+band name, lowercased with spaces and punctuation stripped — Puscifer →
+`puscifer`, Guns N' Roses → `gunsnroses`. The logo is the one in `logos/`
+(always `.png`); the photo is the one in `photos/` (any of `.jpg`, `.jpeg`,
+`.png`, `.webp`, `.avif`). Set `key` to that basename and `photo` to the full
+path including extension. If either file is missing, stop and say which one —
+never add an entry pointing at a file that isn't there.
+
+**Tile number.** The number given is the on-screen tile, 1–49. Subtract one for
+`i`. Tile 34 → `i: 33`. If that tile is already taken, stop and say so.
+
+**`no`.** Highest existing `no` plus one. Nothing more to it.
+
+**Date.** Format as `Fri 4 Dec 2026` — three-letter weekday, day, three-letter
+month, four-digit year. Work out the weekday from the date; don't ask for it.
+If the year is ambiguous or looks wrong (a date in the past, or before the
+other gigs), confirm before committing.
+
+**Venue.** If not given, ask. Never invent one. If only a city is given and
+other bands play a known venue there on the same date, suggest it and confirm.
+
+**Then:** add one row to `BANDS`, matching the column alignment of the rows
+around it. Change nothing else in the file.
+
+When done, report back in one line: band, tile, date, venue — so the details
+can be checked at a glance.
 
 ## Logos
 
