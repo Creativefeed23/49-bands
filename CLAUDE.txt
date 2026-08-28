@@ -55,6 +55,13 @@ editing the image.
 Posts to Formspree (`https://formspree.io/f/xnpqalzb`). Requires http/https;
 it does not work from `file://`.
 
+## Git workflow
+
+Commit directly to `main` and push. Do not create a branch or open a pull
+request. This is a small static site with one maintainer; the PR step is
+unnecessary friction. Every push to `main` deploys to the live site, so make
+sure the change is complete before committing.
+
 ## Deploy config
 
 `wrangler.jsonc` serves the repo root as static assets. `.assetsignore` keeps
