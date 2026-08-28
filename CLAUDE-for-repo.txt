@@ -1,0 +1,62 @@
+# 49 Bands — working notes
+
+Static invitation site for a 49th birthday gig. No build step, no framework
+tooling. Deployed to Cloudflare Workers from `main`; every push goes live.
+
+## How the site is built
+
+`index.html` is the whole site — markup, inline styles and logic in one file.
+`support.js` is the runtime that renders it. Do not restructure either.
+
+Styling is **inline only**. There are no CSS classes and no stylesheet. Match
+the inline style conventions already in the file.
+
+## The grid
+
+A 7×7 grid of 49 tiles. Each tile flips on click; tiles with a band reveal the
+logo, then open a panel with the gig details. Empty tiles show "?" and let
+visitors suggest a band.
+
+Bands are defined in one array near the bottom of `index.html`:
+
+```js
+const BANDS = [
+  { i: 20, key: 'magicdirt', photo: 'photos/magicdirt.jpg', name: 'Magic Dirt', no: 13, date: 'Sat 6 Mar 2027', venue: 'Adelaide Entertainment Centre' }
+];
+```
+
+| Field | Meaning |
+| --- | --- |
+| `i` | Tile position, **0-indexed**. Tile 21 on screen is `i: 20`. |
+| `key` | Logo filename in `logos/`, without `.png`. |
+| `photo` | Path to the photo, with extension. |
+| `no` | Order number shown in the panel. Increment from the current highest. |
+| `date` | Format: `Sat 6 Mar 2027`. |
+| `venue` | Venue and city. |
+
+## Adding a band
+
+1. Confirm `logos/<key>.png` and the photo file both exist. If either is
+   missing, stop and say so rather than adding a broken entry.
+2. Check the tile index isn't already taken by another band.
+3. Add one row to `BANDS`. Change nothing else.
+4. Keep the alignment of the existing rows.
+
+Never invent gig dates or venues. If they weren't given, ask.
+
+## Logos
+
+Some logos are dark and need a white variant on the dark tiles — see
+`logos/johnbutler-white.png`. If a new logo reads poorly, flag it rather than
+editing the image.
+
+## Suggestion form
+
+Posts to Formspree (`https://formspree.io/f/xnpqalzb`). Requires http/https;
+it does not work from `file://`.
+
+## Deploy config
+
+`wrangler.jsonc` serves the repo root as static assets. `.assetsignore` keeps
+`.git`, the README and config files out of the public deploy. Leave both alone
+unless the deploy is broken.
