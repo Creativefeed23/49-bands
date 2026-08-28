@@ -80,10 +80,10 @@ it does not work from `file://`.
 
 ## Git workflow
 
-Commit directly to `main` and push. Do not create a branch or open a pull
-request. This is a small static site with one maintainer; the PR step is
-unnecessary friction. Every push to `main` deploys to the live site, so make
-sure the change is complete before committing.
+Claude Code on the web pushes to a `claude/**` branch. A GitHub Action
+auto-merges that branch into `main`, so there is no pull request step — just
+commit and push as normal. Every merge to `main` deploys to the live site, so
+make sure the change is complete before committing.
 
 ## Deploy config
 
