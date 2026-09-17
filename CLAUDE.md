@@ -64,6 +64,11 @@ other bands play a known venue there on the same date, suggest it and confirm.
 **Then:** add one row to `BANDS`, matching the column alignment of the rows
 around it. Change nothing else in the file.
 
+**Also update `list.html`.** It keeps its own copy of the same `BANDS` array
+(a plain running-order list, no grid) — add the identical row there too, in
+the same pass. The two arrays must always match; check this if they ever
+look out of sync.
+
 When done, report back in one line: band, tile, date, venue — so the details
 can be checked at a glance.
 
