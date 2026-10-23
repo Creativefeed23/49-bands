@@ -30,7 +30,7 @@
 
   <div style="width:min(94vw,980px); margin:26px auto 0">
     <div style="display:grid; gap:1px; background:#221F1B; border:1px solid #221F1B">
-      <sc-for list="{{ sortedGigs }}" as="gig" hint-placeholder-count="4">
+      <sc-for list="{{ sortedGigs }}" as="gig" hint-placeholder-count="5">
         <div style="background:#0C0B0A; padding:22px 20px">
           <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 20px">
             <span style="font-size:17px; letter-spacing:.03em; color:#F2F0EC">{{ gig.name }}</span>
@@ -60,9 +60,9 @@ const GIGS = [
     price: 'From $132.48 + fees',
     note: 'Beck is confirmed for the Sydney date only, not the full tour. Sources disagree on seller — Ticketmaster, Live Nation and Moshtix are all named; check the official Sydney Summertime page before buying.' },
   { name: 'Hard-Ons + Jerry A', venue: 'Ed Castle, Adelaide', date: 'Fri 5 Mar 2027',
-    link: 'https://www.thenote.com.au/news/hard-ons-announce-2027-australian-tour',
-    price: 'Not yet on sale',
-    note: 'Part of a 13-date national tour, tickets via Moshtix. Clashes with the Kings of Leon Melbourne date below — same night.' },
+    link: 'https://www.moshtix.com.au/v2/event/hard-ons-with-jerry-a-%E2%80%94-adelaide/201675',
+    price: 'On sale now via Moshtix — price not confirmed',
+    note: 'Part of a 13-date national tour. Clashes with the Kings of Leon Melbourne date below — same night.' },
   { name: 'Kings of Leon + Ocean Alley', venue: 'Flemington Racecourse, Melbourne', date: 'Fri 5 Mar 2027',
     link: 'https://tixel.com/au/news/2026/10/19/kings-of-leon-announce-2027-australia-and',
     price: 'General sale Tue 27 Oct, via Moshtix — price TBC',
@@ -70,7 +70,11 @@ const GIGS = [
   { name: 'A Perfect Circle + Puscifer', venue: 'The Drive, Adelaide', date: 'Fri 4 Dec 2026',
     link: 'https://www.thedriveadelaide.com.au/events/a-perfect-circle/',
     price: 'Resale from ~$69 (official on-sale closed 20 Mar 2026)',
-    note: 'Face-value sale has passed — remaining tickets are resale (Tixel, Viagogo, StubHub). Check the official page first in case of released holds.' }
+    note: 'Face-value sale has passed — remaining tickets are resale (Tixel, Viagogo, StubHub). Check the official page first in case of released holds.' },
+  { name: 'Tash Sultana', venue: 'Adelaide (venue unconfirmed)', date: 'Apr/May 2027 (date TBC)',
+    link: 'https://www.frontiertouring.com/tashsultana',
+    price: 'General sale already open (since 29 Sep 2026) — price TBC',
+    note: 'Part of a 7-date AU/NZ tour. Couldn\'t confirm the exact Adelaide date or venue — one unverified listing names Hindley St Music Hall. Check the official Frontier Touring link.' }
 ];
 
 class Component extends DCLogic {
@@ -78,7 +82,8 @@ class Component extends DCLogic {
     const MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
     const dateKey = d => {
       const [, day, mon, year] = d.split(' ');
-      return new Date(+year, MONTHS[mon], +day).getTime();
+      const t = new Date(+year, MONTHS[mon], +day).getTime();
+      return isNaN(t) ? Infinity : t;
     };
     const sortedGigs = GIGS.slice().sort((a, b) => dateKey(a.date) - dateKey(b.date));
     return { sortedGigs };
