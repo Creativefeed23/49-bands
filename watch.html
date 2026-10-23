@@ -30,7 +30,7 @@
 
   <div style="width:min(94vw,980px); margin:26px auto 0">
     <div style="display:grid; gap:1px; background:#221F1B; border:1px solid #221F1B">
-      <sc-for list="{{ sortedGigs }}" as="gig" hint-placeholder-count="5">
+      <sc-for list="{{ sortedGigs }}" as="gig" hint-placeholder-count="6">
         <div style="background:#0C0B0A; padding:22px 20px">
           <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 20px">
             <span style="font-size:17px; letter-spacing:.03em; color:#F2F0EC">{{ gig.name }}</span>
@@ -74,7 +74,11 @@ const GIGS = [
   { name: 'Tash Sultana', venue: 'Hindley St Music Hall, Adelaide', date: 'Mon 10 May 2027',
     link: 'https://moshtix.com.au/v2/event/tash-sultana/200619',
     price: '$89.90 GA 18+ (7:00pm)',
-    note: 'Part of a 7-date AU/NZ tour.' }
+    note: 'Part of a 7-date AU/NZ tour.' },
+  { name: 'Guns N\' Roses + Airbourne', venue: 'Adelaide Street Circuit, Adelaide', date: 'Sun 29 Nov 2026',
+    link: 'https://www.stereoboard.com/guns-n-roses-tickets/adelaide/2026-11-29',
+    price: 'Resale only, from ~£147.84 (StubHub) — official sale closed Feb 2026',
+    note: 'The bp Adelaide Grand Final Sunday Concert. Official Ticketmaster sale has passed, so this is resale pricing — check actual AUD cost before buying.' }
 ];
 
 class Component extends DCLogic {
