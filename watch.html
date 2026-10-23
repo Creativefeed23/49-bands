@@ -30,7 +30,7 @@
 
   <div style="width:min(94vw,980px); margin:26px auto 0">
     <div style="display:grid; gap:1px; background:#221F1B; border:1px solid #221F1B">
-      <sc-for list="{{ sortedGigs }}" as="gig" hint-placeholder-count="6">
+      <sc-for list="{{ sortedGigs }}" as="gig" hint-placeholder-count="7">
         <div style="background:#0C0B0A; padding:22px 20px">
           <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 20px">
             <span style="font-size:17px; letter-spacing:.03em; color:#F2F0EC">{{ gig.name }}</span>
@@ -78,7 +78,11 @@ const GIGS = [
   { name: 'Guns N\' Roses + Airbourne', venue: 'Adelaide Street Circuit, Adelaide', date: 'Sun 29 Nov 2026',
     link: 'https://www.stereoboard.com/guns-n-roses-tickets/adelaide/2026-11-29',
     price: 'Resale from $189',
-    note: 'The bp Adelaide Grand Final Sunday Concert. Official Ticketmaster sale has passed, so this is resale pricing.' }
+    note: 'The bp Adelaide Grand Final Sunday Concert. Official Ticketmaster sale has passed, so this is resale pricing.' },
+  { name: 'Garage Days: Spiderbait + Jebediah + more', venue: 'Richard Hamilton Wines, McLaren Vale', date: 'Sat 6 Feb 2027',
+    link: 'https://www.theaureview.com/music/garage-days-festival-2027-mclaren-vale/',
+    price: 'Early Bird from $99 + fee (first 500 only) — check current price, general sale opened 6 Oct 2026',
+    note: 'Inaugural day festival, 3pm–10pm, all ages. Also on the bill: The Potbelleez, Gyroscope, The Delta Riggs, The Lizards, JAKIJ. No confirmed ticketing platform found — check the official announcement or venue site.' }
 ];
 
 class Component extends DCLogic {
