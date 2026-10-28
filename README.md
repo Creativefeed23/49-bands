@@ -12,7 +12,7 @@ index.html        the whole site (markup + inline styles + logic)
 support.js        runtime that renders index.html
 logos/            band logos (PNG, transparent)
 photos/           band photos (webp / jpg / avif / png)
-art/49.png        masthead
+art/49.webp       masthead (art/49.png is the full-size source)
 wrangler.jsonc    Cloudflare config — serves the repo root as static assets
 .assetsignore     files excluded from the public deploy
 ```
