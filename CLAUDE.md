@@ -78,6 +78,15 @@ Some logos are dark and need a white variant on the dark tiles — see
 `logos/johnbutler-white.png`. If a new logo reads poorly, flag it rather than
 editing the image.
 
+## Home-screen app
+
+The site installs as a home-screen app. `app.js` (loaded in the `<head>` of all
+three pages) shows an owner-only Grid / List / Watchlist switcher at the bottom
+and attaches `app.webmanifest`, but only after a page has been opened with
+`?me` (`?me=off` turns it off). Guests never see the switcher or get the
+manifest. Icons live in `icons/`. Any new page should get the same `<head>`
+lines as `list.html`.
+
 ## Suggestion form
 
 Posts to Formspree (`https://formspree.io/f/xnpqalzb`). Requires http/https;
