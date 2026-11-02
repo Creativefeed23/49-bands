@@ -1,18 +1,24 @@
-// Keeps the home-screen app quick. Pages are fetched fresh whenever there is
-// signal, so updates still show straight away; everything else is served from
-// the phone and refreshed in the background.
-var CACHE = '49-v1';
+// Keeps the home-screen app quick. Pages and scripts are fetched fresh whenever
+// there is signal, so updates show straight away; images are served from the
+// phone and refreshed in the background.
+var CACHE = '49-v2';
 
 self.addEventListener('install', function () { self.skipWaiting(); });
-self.addEventListener('activate', function (e) { e.waitUntil(self.clients.claim()); });
+self.addEventListener('activate', function (e) {
+  e.waitUntil(caches.keys().then(function (keys) {
+    return Promise.all(keys.filter(function (k) { return k !== CACHE; }).map(function (k) { return caches.delete(k); }));
+  }).then(function () { return self.clients.claim(); }));
+});
 
 self.addEventListener('fetch', function (e) {
   var req = e.request;
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
 
-  // Pages: network first, cached copy if offline.
-  if (req.mode === 'navigate') {
+  // Pages and our own scripts: network first, cached copy if offline, so
+  // code changes show on the next load.
+  var ownScript = url.origin === location.origin && /\.(js|webmanifest)$/.test(url.pathname);
+  if (req.mode === 'navigate' || ownScript) {
     e.respondWith(fetch(req).then(function (res) {
       var copy = res.clone();
       caches.open(CACHE).then(function (c) { c.put(req, copy); });
@@ -34,7 +40,7 @@ self.addEventListener('fetch', function (e) {
     return;
   }
 
-  // Own files (support.js, art, logos, photos) and fonts: serve the cached copy
+  // Own images (art, logos, photos) and fonts: serve the cached copy
   // now, fetch a fresh one for next time.
   if (url.origin === location.origin || /fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) {
     e.respondWith(caches.open(CACHE).then(function (c) {
