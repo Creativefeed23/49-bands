@@ -81,10 +81,10 @@ editing the image.
 ## Home-screen app
 
 The site installs as a home-screen app. `app.js` (loaded in the `<head>` of all
-three pages) shows an owner-only Grid / List / Watchlist switcher at the bottom
-and attaches `app.webmanifest`, but only after a page has been opened with
-`?me` (`?me=off` turns it off). Guests never see the switcher or get the
-manifest. Icons live in `icons/`. For the owner, `sw.js` caches files on the
+three pages) attaches `app.webmanifest` once a page has been opened with `?me`
+(`?me=off` turns it off), and inside the installed app only, shows an
+owner-only Grid / List / Watchlist switcher at the bottom. Normal browser tabs
+never show the switcher, and guests never get the manifest. Icons live in `icons/`. For the owner, `sw.js` caches files on the
 phone: pages always load fresh when online; other files (support.js, images)
 show the cached copy and update in the background, so a replaced image under
 the same filename appears one open later. Any new page should get the same `<head>`

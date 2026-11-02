@@ -1,5 +1,6 @@
-// Owner-only page switcher. Visiting any page with ?me turns it on for this
-// browser (or installed app); ?me=off turns it off. Guests never see it.
+// Owner-only page switcher. Visiting any page with ?me arms this browser
+// (?me=off disarms it) and offers the install manifest; the switcher itself
+// only shows inside the installed home-screen app. Guests never see it.
 (function () {
   // Paint black straight away so there's no white flash before the page renders.
   document.documentElement.style.background = '#050505';
@@ -23,6 +24,10 @@
 
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(function () {});
 
+  // In a normal browser tab, stop here: no switcher.
+  var app = navigator.standalone || matchMedia('(display-mode: standalone)').matches;
+  if (!app) return;
+
   var pages = [['/', 'Grid'], ['/list.html', 'List'], ['/watch.html', 'Watchlist']];
   // Cloudflare serves /list.html as /list, so compare without the extension.
   var norm = function (p) { return p.replace(/(index)?\.html$/, ''); };
@@ -30,8 +35,7 @@
 
   // The installed app runs edge to edge, so leave room above the iPhone's
   // home-swipe area or taps get eaten by the system gesture.
-  var app = navigator.standalone || matchMedia('(display-mode: standalone)').matches;
-  var foot = app ? 'max(30px, env(safe-area-inset-bottom))' : 'env(safe-area-inset-bottom)';
+  var foot = 'max(30px, env(safe-area-inset-bottom))';
 
   function build() {
     var nav = document.createElement('nav');
