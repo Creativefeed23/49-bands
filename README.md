@@ -14,8 +14,8 @@ logos/            band logos (PNG, transparent)
 photos/           band photos (webp / jpg / avif / png)
 art/49.webp       masthead (art/49.png is the full-size source)
 wrangler.jsonc    Cloudflare config — serves the repo root as static assets
-worker.js         runs for "/" only: ursh.vitalogy.au root shows ursh.html
-ursh.html         one-off page: John Butler / Ben Harper / Jack Johnson
+worker.js         runs for "/" only: kingspark.vitalogy.au root shows kingspark.html
+kingspark.html    leg page: Kings Park, Perth (John Butler / Ben Harper / Jack Johnson)
 .assetsignore     files excluded from the public deploy
 ```
 
