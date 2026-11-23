@@ -45,6 +45,7 @@
             <span style="font-family:'Anton',sans-serif; font-size:14px; color:#C9962C; min-width:24px">{{ band.no }}</span>
             <div style="{{ band.logoStyle }}"></div>
             <span style="font-size:15px; letter-spacing:.04em; color:#F2F0EC; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ band.name }}</span>
+            <span style="{{ band.badgeStyle }}">Attended</span>
           </div>
           <div style="display:flex; align-items:center; gap:20px; font-size:12px; letter-spacing:.06em; color:#8A8377; white-space:nowrap">
             <span>{{ band.date }}</span>
@@ -107,9 +108,14 @@ class Component extends DCLogic {
       const [, day, mon, year] = d.split(' ');
       return new Date(+year, MONTHS[mon], +day).getTime();
     };
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
     const sortedBands = BANDS.slice().sort((a, b) => dateKey(a.date) - dateKey(b.date))
       .map(b => ({
         no: b.no, name: b.name, date: b.date, venue: b.venue, tile: b.i + 1,
+        badgeStyle: dateKey(b.date) < today
+          ? 'flex:none; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C9962C; border:1px solid #C9962C; padding:3px 7px 2px'
+          : 'display:none',
         logoStyle: 'width:64px; height:40px; flex:none; background-image:url(logos/' + b.key + '.png); background-size:contain; background-position:left center; background-repeat:no-repeat'
       }));
 
