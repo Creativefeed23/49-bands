@@ -46,6 +46,7 @@
             <div style="{{ band.logoStyle }}"></div>
             <span style="font-size:15px; letter-spacing:.04em; color:#F2F0EC; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ band.name }}</span>
             <span style="{{ band.badgeStyle }}">Attended</span>
+            <span style="{{ band.repeatStyle }}">2nd show</span>
           </div>
           <div style="display:flex; align-items:center; gap:20px; font-size:12px; letter-spacing:.06em; color:#8A8377; white-space:nowrap">
             <span>{{ band.date }}</span>
@@ -86,6 +87,11 @@ const BANDS = [
   { i: 48, key: 'l7',                photo: 'photos/l7.jpg',                 name: 'L7',                      no: 21, date: 'Tue 23 Mar 2027', venue: 'The Gov, Adelaide' }
 ];
 
+// Extra shows by bands already in BANDS. List page only; they don't count as a new band or take a tile.
+const REPEATS = [
+  { key: 'qotsa', date: 'Fri 11 Dec 2026', venue: 'MyState Bank Arena, Hobart' }
+];
+
 class Component extends DCLogic {
   renderVals() {
     const MONTHS = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
@@ -95,9 +101,13 @@ class Component extends DCLogic {
     };
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-    const sortedBands = BANDS.slice().sort((a, b) => dateKey(a.date) - dateKey(b.date))
+    const sortedBands = BANDS.concat(REPEATS.map(r => Object.assign({ repeat: true }, BANDS.find(b => b.key === r.key), r)))
+      .sort((a, b) => dateKey(a.date) - dateKey(b.date))
       .map(b => ({
-        no: b.no, name: b.name, date: b.date, venue: b.venue, tile: b.i + 1,
+        no: b.repeat ? '' : b.no, name: b.name, date: b.date, venue: b.venue, tile: b.i + 1,
+        repeatStyle: b.repeat
+          ? 'flex:none; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#8A8377; border:1px solid #5C574E; padding:3px 7px 2px'
+          : 'display:none',
         badgeStyle: dateKey(b.date) < today
           ? 'flex:none; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C9962C; border:1px solid #C9962C; padding:3px 7px 2px'
           : 'display:none',
