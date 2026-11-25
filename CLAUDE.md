@@ -69,6 +69,11 @@ around it. Change nothing else in the file.
 the same pass. The two arrays must always match; check this if they ever
 look out of sync.
 
+**Second shows.** When a band already on the grid is seen again (e.g. QOTSA
+in Adelaide and Hobart), don't add it to `BANDS`. Add it to the `REPEATS`
+array in `list.html` only — `{ key, date, venue }` — so it shows in the
+running order with a "2nd show" tag but no number or new tile.
+
 When done, report back in one line: band, tile, date, venue — so the details
 can be checked at a glance.
 
